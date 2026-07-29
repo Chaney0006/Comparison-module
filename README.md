@@ -1,38 +1,23 @@
 # Comparison-module
-| Comparison module | Comparison item | Model / Design / Scenario I | Model / Design / Scenario II |
+# Comparison of CRB-Based Sensing and ISAC Optimization Studies
+
+| Comparison item | Paper 1 | Paper 2 | Paper 3 |
 |---|---|---|---|
-| **Target model** | Model type | Point target model | Extended target model |
-|  | Target response matrix | $H=\alpha a(\theta)a^T(\theta)$ | General target response matrix $H$ |
-|  | Estimated parameter | Target angle $\theta$ | Target response matrix $H$ |
-|  | Received signal | $y(t)=G_r\Phi^T H\Phi G_t x(t)+n(t)$ | $y(t)=G_r\Phi^T H\Phi G_t x(t)+n(t)$ |
-|  | CRB metric | $\mathrm{CRB}(\theta)$ |<img width="264" height="41" alt="image" src="https://github.com/user-attachments/assets/05b1a3ed-a667-4875-ad95-fd5deac40212" /> |
-|  | CRB-related parameters | $R_x,v,R_1,R_2,\sigma_R^2,T,\alpha^2,\theta,d_{\mathrm{IRS}},\lambda_R$ | $R_x,G_t,G_r,\sigma_R^2,T$ |
-|  | Estimability condition | rank(Gt)>1 or rank(Gr)>1| rank(Gt​)=rank(Gr​)=N |
-|  | Optimization method | Alternating optimization (AO) | SVD and power allocation |
-| **Sensing-constrained design** | Design type | SNR-constrained design | CRB-constrained design |
-|  | Sensing task | Target detection | Target DoA estimation |
-|  | Performance metric | Radar SNR | Cramér–Rao Bound (CRB) |
-|  | Estimated parameter | Whether the target exists | Target angles $\boldsymbol{\theta}=[\theta_1,\theta_2]^T$ |
-|  | Received radar signal | $Y_r=\alpha_tH_t(\phi)WS+N_r$ | $Y_r=\alpha_tH_t(\phi)WS+N_r$ |
-|  | Optimization objective | Maximize the achievable communication sum-rate | Maximize the achievable communication sum-rate |
-|  | Sensing constraint | $\mathrm{SNR}_t\geq\Gamma_t$ |<img width="155" height="26" alt="image" src="https://github.com/user-attachments/assets/554b9653-452e-410e-b345-3fedfd502969" /> |
-|  | Other constraints | $\lVert W\rVert_F^2\leq P_t,\quad\lvert\phi_n\rvert=1$ | $\lVert W\rVert_F^2\leq P_t,\quad\lvert\phi_n\rvert=1$ |
-|  | Optimized variables | Beamforming $W$, receive filter $u$, and RIS coefficients $\phi$ | Beamforming $W$ and RIS coefficients $\phi$ |
-|  | Main methods | FP + MM + ADMM | FP + MM + BCD + penalty dual decomposition |
-|  | Effect of more RIS elements | Improves target detection and communication sum-rate | Provides a larger gain for DoA estimation |
-|  | Simulation result | Sum-rate increases by approximately 40% | Sum-rate increases by approximately 76% |
-|  | Residual self-interference | Causes performance loss | Causes more significant performance loss |
-| **Multi-target sensing** | Scenario | Scenario I | Scenario II |
-|  | Prior target knowledge | No prior target knowledge | Prior target knowledge is available |
-|  | Practical stage | Target detection | Target tracking |
-|  | Sensing objective | Estimate the complete multi-target response matrix | Estimate the angles and complex coefficients of multiple targets |
-|  | Estimated parameter | $G=A_r^cBA_t^H$ | $\boldsymbol{\xi}=[\boldsymbol{\theta}^T,\boldsymbol{\beta}_R^T,\boldsymbol{\beta}_I^T]^T$ |
-|  | Received echo signal | $Y=A_r^cBA_t^HX+Z$ | $Y=A_r^cBA_t^HX+Z$ |
-|  | CRB metric | <img width="161" height="43" alt="image" src="https://github.com/user-attachments/assets/24e5bc2f-9332-4e0e-b880-1960907262ad" /> | <img width="184" height="32" alt="image" src="https://github.com/user-attachments/assets/ee91aaf4-142d-4255-8739-8c7cff886b3b" />|
-|  | Optimization objective | Minimize $\mathrm{CRB}_1(S_x)$ | Minimize $\mathrm{CRB}_2(S_x)$ |
-|  | Rate constraint | $R(S_x)\geq\bar{R}$ | $R(S_x)\geq\bar{R}$ |
-|  | Power constraint | tr(Sx​)≤P | tr(Sx​)≤P |
-|  |Original problem|<img width="226" height="74" alt="image" src="https://github.com/user-attachments/assets/70f46e3c-f404-46c7-908c-28052df1eb71" /> |<img width="203" height="62" alt="image" src="https://github.com/user-attachments/assets/24691ac7-3411-46dc-beaa-b71c746eb098" />|
-|  | Optimized variable | Transmit covariance matrix $S_x$ | Transmit covariance matrix $S_x$ |
-|  | Solution method | Lagrange duality and convex optimization | Semidefinite programming (SDP) |
-|  | Beamforming algorithm | SCA | SCA |
+| **Paper title / link** | [Intelligent Reflecting Surface Enabled Sensing: Cramér-Rao Bound Optimization](https://doi.org/10.1109/TSP.2023.3280715) | [SNR/CRB-Constrained Joint Beamforming and Reflection Designs for RIS-ISAC Systems](https://doi.org/10.1109/TWC.2023.3341429) | [Fundamental CRB-Rate Tradeoff in Multi-Antenna ISAC Systems With Information Multicasting and Multi-Target Sensing](https://doi.org/10.1109/TWC.2023.3312723) |
+| **System model** | IRS-enabled non-line-of-sight sensing system consisting of a multi-antenna AP, an IRS, and a sensing target | RIS-assisted ISAC system supporting MU-MISO communications and radar sensing | Multi-antenna ISAC system performing information multicasting and multi-target sensing |
+| **Sensing scenarios** | Point-target sensing and extended-target sensing | Target detection using an SNR constraint and target DoA estimation using a CRB constraint | Scenario I without prior target knowledge and Scenario II with prior target knowledge |
+| **Target model** | Point target: $H=\alpha a(\theta)a^T(\theta)$<br><br>Extended target: general target response matrix $H$ | A single sensing target characterized by its existence, reflection coefficient, and DoA parameters | $M$ targets with response matrix $G=A_r^cBA_t^H$ |
+| **Estimated parameters** | Point target: DoA $\theta$<br><br>Extended target: target response matrix $H$ | SNR-constrained design: whether the target exists<br><br>CRB-constrained design: $\boldsymbol{\theta}=[\theta_1,\theta_2]^T$ and complex target coefficient $\alpha_t$ | Scenario I: complete response matrix $G$<br><br>Scenario II: $\boldsymbol{\xi}=[\boldsymbol{\theta}^T,\boldsymbol{\beta}_R^T,\boldsymbol{\beta}_I^T]^T$ |
+| **Received sensing signal** | $y(t)=G_r\Phi^T H\Phi G_t x(t)+n(t)$ | $Y_r=\alpha_tH_t(\phi)WS+N_r$ | $Y=A_r^cBA_t^HX+Z$ |
+| **Sensing metric** | Cramér-Rao bound for estimating $\theta$ or $H$ | Radar SNR for target detection or CRB for DoA estimation | CRB for estimating the multi-target response matrix or target parameters |
+| **CRB expression** | Point target: $\mathrm{CRB}(\theta)$ depends on both the transmit covariance $R_x$ and IRS beamformer $v$<br><br>Extended target:<img width="264" height="38" alt="image" src="https://github.com/user-attachments/assets/531edd69-5d7f-4226-985d-f8d45e493758" />|<img width="272" height="35" alt="image" src="https://github.com/user-attachments/assets/bfa7977e-3e1b-4de6-aa70-f58f99de5d72" /> | Scenario I: <img width="150" height="35" alt="image" src="https://github.com/user-attachments/assets/60b5f1f6-0e64-427e-95b5-19e0597e64ee" /><br><br>Scenario II:<img width="173" height="38" alt="image" src="https://github.com/user-attachments/assets/fd4789b1-d91b-48eb-abf3-11d373a8a631" />|
+| **Optimization objective** | Point target: minimize $\mathrm{CRB}(\theta)$<br><br>Extended target: minimize <img width="96" height="29" alt="image" src="https://github.com/user-attachments/assets/d703296e-1548-4d6a-ac17-5df2da33464d" /> | Maximize the achievable communication sum-rate under either an SNR or CRB sensing constraint | Minimize $\mathrm{CRB}_1(S_x)$ or $\mathrm{CRB}_2(S_x)$ subject to a required multicast rate |
+| **Main optimization problem** | $\displaystyle\min_{R_x,v}\ \mathrm{CRB}(\theta)$ for the point target<br><br><img width="120" height="39" alt="image" src="https://github.com/user-attachments/assets/00c3964a-4564-4844-b3aa-9df4190784f8" /> for the extended target | <img width="224" height="81" alt="image" src="https://github.com/user-attachments/assets/2ba7c2c1-e4f9-440e-b515-2fed0e3a8ae6" />| $\displaystyle\min_{S_x\succeq0}\ \mathrm{CRB}_i(S_x),\quad i\in\{1,2\}$ |
+| **Sensing constraint** | The sensing requirement is directly represented by the CRB-minimization objective | SNR design: SNRt≥Γt	​<br><br>CRB design: CRBθ1+CRBθ2≤ε| The sensing requirement is represented by minimizingCRB1(Sx) or CRB2(Sx) |
+| **Communication constraint** | No communication-rate constraint; the system focuses on IRS-enabled sensing | Communication performance is represented by the sum-rate maximization objective | $\displaystyle\min_{k\in\mathcal K}\log_2\left(1+\frac{h_k^HS_xh_k}{\sigma^2}\right)\geq\bar R$ |
+| **Transmit-power constraint** | <img width="152" height="30" alt="image" src="https://github.com/user-attachments/assets/9158d3a0-5f23-4854-8b74-da207f28d4db" />  | <img width="62" height="22" alt="image" src="https://github.com/user-attachments/assets/5f6ab434-137e-459b-9cc0-59a4f9e923dd" />| tr(Sx​)≤P, Sx​⪰0 |
+| **RIS constraint** | tr(Rx)≤P0and Rx⪰0 | $\lvert\phi_n\rvert=1,\ \forall n$ | No RIS variable or unit-modulus constraint |
+| **Estimability condition** | Point target: rank(Gt)>1 or rank(Gr)>1<br><br>Extended target: rank(Gt)=rank(Gr)=N | The equivalent Fisher information matrix must be nonsingular for valid DoA estimation | Scenario I requires a full-rank transmit covariance matrix to obtain a finite CRB for the complete response matrix |
+| **Optimized variables** | Point target: transmit covariance RX and IRS reflective beamformer $v$<br><br>Extended target:  $R_x$ | SNR design: transmit beamforming $W$, receive filter $u$, and RIS coefficients $\phi$<br><br>CRB design: $W$ and $\phi$ | Transmit covariance matrix $S_x$; the joint beamforming extension also optimizes information beam $w$ and sensing covariance $S_{\mathrm{sen}}$ |
+| **Problem characteristics** | Point-target problem is non-convex because of coupled beamformers and unit-modulus constraints<br><br>Extended-target problem is convex after transformation | Both SNR- and CRB-constrained problems are non-convex because of coupled variables, fractional expressions, and unit-modulus constraints | Scenario I covariance optimization is convex; Scenario II is reformulated as an SDP; joint beamforming problems are non-convex |
+| **Solution method** | Point target: AO, SDR, SCA, and Gaussian randomization<br><br>Extended target: SVD-based eigenmode transmission and channel-amplitude-inversion power allocation | SNR design: FP, MM, ADMM, and alternating updates<br><br>CRB design: FP, MM,BCD, and penalty dual decomposition | Scenario I: Lagrange duality and convex optimization<br><br>Scenario II: SDP<br><br>Joint information and sensing beamforming: SCA|
