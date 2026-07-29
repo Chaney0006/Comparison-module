@@ -1,0 +1,36 @@
+| Comparison module | Comparison item | Model / Design / Scenario I | Model / Design / Scenario II |
+|---|---|---|---|
+| **Target model** | Model type | Point target model | Extended target model |
+|  | Target response matrix | $H=\alpha a(\theta)a^T(\theta)$ | General target response matrix $H$ |
+|  | Estimated parameter | Target angle $\theta$ | Target response matrix $H$ |
+|  | Received signal | $y(t)=G_r\Phi^T H\Phi G_t x(t)+n(t)$ | $y(t)=G_r\Phi^T H\Phi G_t x(t)+n(t)$ |
+|  | CRB metric | $\mathrm{CRB}(\theta)$ | $\mathrm{CRB}(H)=\dfrac{\sigma_R^2}{T}\operatorname{tr}\!\left((G_tR_xG_t^H)^{-1}\right)\operatorname{tr}\!\left((G_r^HG_r)^{-1}\right)$ |
+|  | CRB-related parameters | $R_x,v,R_1,R_2,\sigma_R^2,T,\alpha^2,\theta,d_{\mathrm{IRS}},\lambda_R$ | $R_x,G_t,G_r,\sigma_R^2,T$ |
+|  | Estimability condition | $\operatorname{rank}(G_t)>1$ or $\operatorname{rank}(G_r)>1$ | $\operatorname{rank}(G_t)=\operatorname{rank}(G_r)=N$ |
+|  | Optimization method | Alternating optimization (AO) | SVD and power allocation |
+| **Sensing-constrained design** | Design type | SNR-constrained design | CRB-constrained design |
+|  | Sensing task | Target detection | Target DoA estimation |
+|  | Performance metric | Radar SNR | Cramér–Rao Bound (CRB) |
+|  | Estimated parameter | Whether the target exists | Target angles $\boldsymbol{\theta}=[\theta_1,\theta_2]^T$ |
+|  | Received radar signal | $Y_r=\alpha_tH_t(\phi)WS+N_r$ | $Y_r=\alpha_tH_t(\phi)WS+N_r$ |
+|  | Optimization objective | Maximize the achievable communication sum-rate | Maximize the achievable communication sum-rate |
+|  | Sensing constraint | $\mathrm{SNR}_t\geq\Gamma_t$ | $\mathrm{CRB}_{\theta_1}+\mathrm{CRB}_{\theta_2}\leq\Gamma_{\mathrm{CRB}}$ |
+|  | Other constraints | $\lVert W\rVert_F^2\leq P_t,\quad\lvert\phi_n\rvert=1$ | $\lVert W\rVert_F^2\leq P_t,\quad\lvert\phi_n\rvert=1$ |
+|  | Optimized variables | Beamforming $W$, receive filter $u$, and RIS coefficients $\phi$ | Beamforming $W$ and RIS coefficients $\phi$ |
+|  | Main methods | FP + MM + ADMM | FP + MM + BCD + penalty dual decomposition |
+|  | Effect of more RIS elements | Improves target detection and communication sum-rate | Provides a larger gain for DoA estimation |
+|  | Simulation result | Sum-rate increases by approximately 40% | Sum-rate increases by approximately 76% |
+|  | Residual self-interference | Causes performance loss | Causes more significant performance loss |
+| **Multi-target sensing** | Scenario | Scenario I | Scenario II |
+|  | Prior target knowledge | No prior target knowledge | Prior target knowledge is available |
+|  | Practical stage | Target detection | Target tracking |
+|  | Sensing objective | Estimate the complete multi-target response matrix | Estimate the angles and complex coefficients of multiple targets |
+|  | Estimated parameter | $G=A_r^cBA_t^H$ | $\boldsymbol{\xi}=[\boldsymbol{\theta}^T,\boldsymbol{\beta}_R^T,\boldsymbol{\beta}_I^T]^T$ |
+|  | Received echo signal | $Y=A_r^cBA_t^HX+Z$ | $Y=A_r^cBA_t^HX+Z$ |
+|  | CRB metric | $\mathrm{CRB}_1(S_x)=\dfrac{N_r\sigma_r^2}{L}\operatorname{tr}(S_x^{-1})$ | $\mathrm{CRB}_2(S_x)=\operatorname{tr}(C_\xi)=\operatorname{tr}(F_\xi^{-1})$ |
+|  | Optimization objective | Minimize $\mathrm{CRB}_1(S_x)$ | Minimize $\mathrm{CRB}_2(S_x)$ |
+|  | Rate constraint | $R(S_x)\geq\bar{R}$ | $R(S_x)\geq\bar{R}$ |
+|  | Power constraint | $\operatorname{tr}(S_x)\leq P$ | $\operatorname{tr}(S_x)\leq P$ |
+|  | Optimized variable | Transmit covariance matrix $S_x$ | Transmit covariance matrix $S_x$ |
+|  | Solution method | Lagrange duality and convex optimization | Semidefinite programming (SDP) |
+|  | Beamforming algorithm | SCA | SCA |
